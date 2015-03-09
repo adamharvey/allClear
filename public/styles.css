@@ -1,24 +1,24 @@
 ul {
-    paddingLeft: 0,
-    listStyleType: "none"
+    padding-left: 0;
+    list-style-type: none;
 }
 
 li {
-      margin: '5px 0',
-      borderRadius: 5
+      margin: '5px 0';
+      border-radius: 5px;
 }
 
-removeItem {
-        fontSize: 20,
-        float: "left",
-        position: "absolute",
-        top: 12,
-        left: 6,
-        cursor: "pointer",
-        color: "rgb(222, 79, 79)"
+.delete {
+        font-size: 20;
+        float: "left";
+        position: "absolute";
+        top: 12;
+        left: 6;
+        cursor: pointer;
+        color: rgb(222, 79, 79);
 }
 
-todoItem {
-          paddingLeft: 20,
-          fontSize: 17
+.todoItem {
+          paddingLeft: 20px;
+          fontSize: 17px;
 }
