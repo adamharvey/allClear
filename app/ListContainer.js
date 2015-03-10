@@ -9,7 +9,6 @@ var ListContainer = React.createClass({
     }
   },
   handleAddItem: function(newItem){
-    console.log('set');
     this.setState({
       list: this.state.list.concat([newItem])
     });
@@ -25,6 +24,9 @@ var ListContainer = React.createClass({
     return (
       <div className="col-sm-6">
       <div className="col-sm-12">
+      <span
+      className="glyphicon glyphicon-remove delete"
+      onClick={this.props.removeList}/>
       <h3 className="text-center"> {this.props.defaultItem} List </h3>
       <AddItem add={this.handleAddItem} placeholder={'new ' + this.props.defaultItem + ' item'}/>
       <List items={this.state.list} remove={this.handleRemoveItem}/>

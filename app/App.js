@@ -8,6 +8,14 @@ var App = React.createClass({
       lists: []
     }
   },
+  removeList: function(obj) {
+    alert(obj);
+    //indexes don't all auto update themselves
+    this.state.lists.splice(obj,1);
+    for (i=obj;i<this.state.lists.length;i++)
+      this.state.lists[i].index--;
+    this.forceUpdate();
+  },
   addNewList: function(obj){
     var newList = {
       newTitle: obj,
@@ -21,7 +29,7 @@ var App = React.createClass({
     var lists = this.state.lists.map(function(list, index)  {
 
       return (
-        <ListContainer defaultItem={list.newTitle} />
+        <ListContainer defaultItem={list.newTitle} removeList={this.removeList.bind(null, list.index)}  />
       )
     }.bind(this));
     return (
