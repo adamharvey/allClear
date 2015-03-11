@@ -22,3 +22,21 @@ li {
           paddingLeft: 20px;
           fontSize: 17px;
 }
+
+.top-corner {
+  position: absolute;
+  top: 27px;
+}
+
+.a {
+  background: #900;
+}
+
+.b {
+  background: #FFF;
+  padding: 1px;
+}
+
+.c {
+  background: #FFF;
+}

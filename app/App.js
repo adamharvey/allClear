@@ -1,6 +1,7 @@
 var React = require('react');
 var ListContainer = require('./ListContainer');
 var AddList = require('./AddList');
+var ColorList = require('./ColorList');
 
 var App = React.createClass({
   getInitialState: function() {
@@ -15,6 +16,9 @@ var App = React.createClass({
     for (i=obj;i<this.state.lists.length;i++)
       this.state.lists[i].index--;
     this.forceUpdate();
+  },
+  selectColor: function(what) {
+
   },
   addNewList: function(obj){
     var newList = {
@@ -37,6 +41,7 @@ var App = React.createClass({
       <div className="container">
       <div className="row">
       <AddList add={this.addNewList}/>
+      <ColorList selectColor={this.selectColor}/>
       </div>
       </div>
     {lists}
