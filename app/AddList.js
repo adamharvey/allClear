@@ -1,6 +1,7 @@
 var React = require('react');
 
 var AddList = React.createClass({
+
   getInitialState: function() {
     return {
       listName: ''
@@ -25,7 +26,7 @@ var AddList = React.createClass({
       <h3 className="text-center">Create New List</h3>
       <input type="text"
       onChange={this.handleChange}
-      value={this.state.listName}/>{'         '}
+      value={this.state.listName}/>{' '}
       <button className="btn btn-primary">Add List</button>
       </form>
     )

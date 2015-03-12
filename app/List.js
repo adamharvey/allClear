@@ -2,7 +2,7 @@ var React = require('react');
 
 var List = React.createClass({
   render: function(){
-
+        if (this.props.items == undefined) this.props.items = [];
         var listItems = this.props.items.map(function(item, index){
           var s = {background: '#'+index+index+index};
       return (

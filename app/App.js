@@ -7,9 +7,12 @@ var firebase = require('firebase');
 var App = React.createClass({
   componentDidMount: function() {
     this.firebaseRef.on('child_added', function(item) {
+      debugger;
+      var newList = this.state.lists.concat([{newTitle: item.val().newTitle, index: item.key()}]);
       this.setState({
-        lists: this.state.lists.concat([{newTitle: item.val().newTitle, index: item.key()}])
-      })
+        lists: newList
+      });
+      this.forceUpdate();
     }.bind(this));
     this.firebaseRef.on('child_removed', function(item) {
       var key = item.key();
@@ -29,8 +32,6 @@ var App = React.createClass({
     }
   },
   removeList: function(obj) {
-    alert(obj);
-    debugger;
     this.firebaseRef.child(obj).remove();
   },
   selectColor: function(what) {
@@ -38,7 +39,8 @@ var App = React.createClass({
   },
   addNewList: function(obj){
     var newItem = {
-      newTitle: obj
+      newTitle: obj,
+      list: []
     };
   //  setTimeout( function(){
   //    debugger;
@@ -47,9 +49,9 @@ var App = React.createClass({
   },
   render: function(){
     var lists = this.state.lists.map(function(list, index)  {
-
+debugger;
       return (
-        <ListContainer defaultItem={list.newTitle} removeList={this.removeList.bind(null, list.index)}  />
+        <ListContainer key={list.newTitle} defaultItem={list.newTitle} firebase={this.firebaseRef} removeList={this.removeList.bind(null, list.index)} index={list.index} />
       )
     }.bind(this));
     return (

@@ -1,24 +1,54 @@
 var React = require('react');
 var AddItem = require('./AddItem');
 var List = require('./List');
+var firebase = require('firebase');
 
 var ListContainer = React.createClass({
+  componentDidMount: function() {
+    this.firebaseRef.on('value', function(items) {
+      Object.keys(items.val()).forEach(function(key) {
+
+        var item = items.val()[key];
+        if (this.props.defaultItem === item.newTitle) {
+          this.setState({
+            list: item.items
+          });
+        };
+      }.bind(this));
+    }.bind(this));
+    this.firebaseRef.on('child_changed', function(item) {
+      if (this.props.defaultItem === item.val().newTitle) {
+        debugger;
+        this.setState({
+          list: item.val().items
+        });
+      }
+    }.bind(this));
+    this.firebaseRef.on('child_removed', function(item) {
+      debugger;
+      var key = item.key();
+      var newList = this.state.lists.filter(function(item) {
+        return item.index !== key;
+      });
+      this.setState({
+        lists: newList
+      })
+    }.bind(this));
+  },
   getInitialState: function(){
+    this.firebaseRef = this.props.firebase;
     return {
       list: []
     }
   },
   handleAddItem: function(newItem){
-    this.setState({
-      list: this.state.list.concat([newItem])
-    });
+debugger;
+    this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: this.state.list.concat([newItem])});
   },
   handleRemoveItem: function(index){
     var newList = this.state.list;
     newList.splice(index, 1);
-    this.setState({
-      list: newList
-    })
+    this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: newList});
   },
   render: function(){
     return (
