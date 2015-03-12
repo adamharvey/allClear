@@ -4,6 +4,13 @@ var List = require('./List');
 var firebase = require('firebase');
 
 var ListContainer = React.createClass({
+  getInitialState: function(){
+    this.firebaseRef = this.props.firebase;
+    debugger;
+    return {
+      list: []
+    }
+  },
   componentDidMount: function() {
     this.firebaseRef.on('value', function(items) {
       Object.keys(items.val()).forEach(function(key) {
@@ -35,14 +42,10 @@ var ListContainer = React.createClass({
       })
     }.bind(this));
   },
-  getInitialState: function(){
-    this.firebaseRef = this.props.firebase;
-    return {
-      list: []
-    }
-  },
   handleAddItem: function(newItem){
 debugger;
+if (this.state.list == undefined)
+  this.state.list = []; //TODO: why is it undefined?
     this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: this.state.list.concat([newItem])});
   },
   handleRemoveItem: function(index){

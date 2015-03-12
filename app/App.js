@@ -7,26 +7,24 @@ var firebase = require('firebase');
 var App = React.createClass({
   componentDidMount: function() {
     this.firebaseRef.on('child_added', function(item) {
-      debugger;
-      var newList = this.state.lists.concat([{newTitle: item.val().newTitle, index: item.key()}]);
+      this.superList = this.superList.concat([{newTitle: item.val().newTitle, index: item.key()}]);
       this.setState({
-        lists: newList
+        lists: this.superList
       });
-      this.forceUpdate();
     }.bind(this));
     this.firebaseRef.on('child_removed', function(item) {
       var key = item.key();
-      var newList = this.state.lists.filter(function(item) {
+      this.superList = this.superList.filter(function(item) {
         return item.index !== key;
       });
       this.setState({
-        lists: newList
+        lists: this.superList
       })
     }.bind(this));
   },
   getInitialState: function() {
     this.firebaseRef = new firebase("https://all-clear.firebaseio.com");
-
+    this.superList = [];
     return {
       lists: []
     }
@@ -48,8 +46,7 @@ var App = React.createClass({
   //});
   },
   render: function(){
-    var lists = this.state.lists.map(function(list, index)  {
-debugger;
+    var lists = this.superList.map(function(list, index)  {
       return (
         <ListContainer key={list.newTitle} defaultItem={list.newTitle} firebase={this.firebaseRef} removeList={this.removeList.bind(null, list.index)} index={list.index} />
       )
