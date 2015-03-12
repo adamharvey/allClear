@@ -6,6 +6,7 @@ var List = React.createClass({
         var listItems = this.props.items.map(function(item, index){
           var s = {background: '#'+index+index+index};
       return (
+
         <li key={index} className="list-group-item">
         <span
         className="glyphicon glyphicon-remove delete"

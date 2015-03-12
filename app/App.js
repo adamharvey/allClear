@@ -2,34 +2,50 @@ var React = require('react');
 var ListContainer = require('./ListContainer');
 var AddList = require('./AddList');
 var ColorList = require('./ColorList');
+var firebase = require('firebase');
 
 var App = React.createClass({
+  componentDidMount: function() {
+    this.firebaseRef.on('child_added', function(item) {
+      this.setState({
+        lists: this.state.lists.concat([{newTitle: item.val().newTitle, index: item.key()}])
+      })
+    }.bind(this));
+    this.firebaseRef.on('child_removed', function(item) {
+      var key = item.key();
+      var newList = this.state.lists.filter(function(item) {
+        return item.index !== key;
+      });
+      this.setState({
+        lists: newList
+      })
+    }.bind(this));
+  },
   getInitialState: function() {
+    this.firebaseRef = new firebase("https://all-clear.firebaseio.com");
+
     return {
       lists: []
     }
   },
   removeList: function(obj) {
     alert(obj);
-    //indexes don't all auto update themselves
-    this.state.lists.splice(obj,1);
-    for (i=obj;i<this.state.lists.length;i++)
-      this.state.lists[i].index--;
-    this.forceUpdate();
+    debugger;
+    this.firebaseRef.child(obj).remove();
   },
   selectColor: function(what) {
 
   },
   addNewList: function(obj){
-    var newList = {
-      newTitle: obj,
-      index: this.state.lists.length
+    var newItem = {
+      newTitle: obj
     };
-    this.state.lists = this.state.lists.concat([newList]);
-        this.forceUpdate();
+  //  setTimeout( function(){
+  //    debugger;
+    this.firebaseRef.push(newItem)
+  //});
   },
   render: function(){
-
     var lists = this.state.lists.map(function(list, index)  {
 
       return (
@@ -41,7 +57,6 @@ var App = React.createClass({
       <div className="container">
       <div className="row">
       <AddList add={this.addNewList}/>
-      <ColorList selectColor={this.selectColor}/>
       </div>
       </div>
     {lists}
