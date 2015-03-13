@@ -15,6 +15,7 @@ var AddList = React.createClass({
   handleSubmit: function(e){
     event.preventDefault();
   //  this.props.add(this.state);
+  debugger;
       this.props.add(this.state.listName);
       this.setState({
         listName: ''

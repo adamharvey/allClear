@@ -6,33 +6,41 @@ var firebase = require('firebase');
 var ListContainer = React.createClass({
   getInitialState: function(){
     this.firebaseRef = this.props.firebase;
-    debugger;
     return {
       list: []
     }
   },
   componentDidMount: function() {
     this.firebaseRef.on('value', function(items) {
+      console.log("Startzzz");
       Object.keys(items.val()).forEach(function(key) {
-
         var item = items.val()[key];
+        console.log(item);
+        if (key == 'users') {
+          console.log("###!"+item.ids);
+          if (item.ids.indexOf(window.user) < 0) {
+            item.ids.unshift(window.user);
+            this.firebaseRef.child('users').set(item);
+          }
+          window.users = item.ids;
+          this.props.parent.forceUpdate();
+        }
         if (this.props.defaultItem === item.newTitle) {
           this.setState({
             list: item.items
           });
         };
       }.bind(this));
+      console.log("Endzzz");
     }.bind(this));
     this.firebaseRef.on('child_changed', function(item) {
       if (this.props.defaultItem === item.val().newTitle) {
-        debugger;
         this.setState({
           list: item.val().items
         });
       }
     }.bind(this));
     this.firebaseRef.on('child_removed', function(item) {
-      debugger;
       var key = item.key();
       var newList = this.state.lists.filter(function(item) {
         return item.index !== key;
@@ -43,10 +51,9 @@ var ListContainer = React.createClass({
     }.bind(this));
   },
   handleAddItem: function(newItem){
-debugger;
 if (this.state.list == undefined)
   this.state.list = []; //TODO: why is it undefined?
-    this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: this.state.list.concat([newItem])});
+    this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: this.state.list.concat([newItem + ' ' + window.user])});
   },
   handleRemoveItem: function(index){
     var newList = this.state.list;
