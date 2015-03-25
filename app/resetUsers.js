@@ -1,3 +1,3 @@
-var firebase = require('firebase');
-var firebaseRef = new firebase("https://all-clear.firebaseio.com");
-firebaseRef.child('users').set({ids:['Obert']});
+var f = require('firebase');
+var fr = new f("https://all-clear.firebaseio.com");
+fr.child('users').set({ids:['Obert']});

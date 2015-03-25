@@ -8,9 +8,10 @@ var firebase = require('firebase');
 var NotLoggedIn = React.createClass({
   render: function() {
     return (
-      <div>
-      <h1>uhoh</h1>
-      <button onClick={this.props.that.handleLogin} >Login</button>
+      <div
+      className="login-page">
+      <img src='logo.png'/>
+      <button onClick={this.props.that.handleLogin} className="btn btn-success login-button">Login via Google</button>
       </div>
     )
   }
@@ -32,7 +33,7 @@ var LoggedIn = React.createClass({
           </div>
         </div>
         {lists}
-        <div>
+        <div className="b">
       {window.users}
       </div>
       </div>
@@ -44,8 +45,8 @@ var LoggedIn = React.createClass({
 var App = React.createClass({
   componentDidMount: function() {
     this.firebaseRef.on('child_added', function(item) {
-      console.log('!!!!!!: ' +item);
-      this.superList = this.superList.concat([{newTitle: item.val().newTitle, index: item.key()}]);
+      if (item.val().newTitle != undefined)
+        this.superList = this.superList.concat([{newTitle: item.val().newTitle, index: item.key()}]);
       this.setState({
         lists: this.superList
       });
@@ -63,7 +64,7 @@ var App = React.createClass({
   getInitialState: function() {
     this.firebaseRef = new firebase("https://all-clear.firebaseio.com");
     this.superList = [];
-    //this.firebaseRef.child('users').set({ids:['Obert']});
+    this.firebaseRef.child('users').set({ids:['Obert']});
     return {
       lists: []
     }

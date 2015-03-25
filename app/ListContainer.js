@@ -22,7 +22,7 @@ var ListContainer = React.createClass({
             item.ids.unshift(window.user);
             this.firebaseRef.child('users').set(item);
           }
-          window.users = item.ids;
+          window.users = item.ids.join(", ");
           this.props.parent.forceUpdate();
         }
         if (this.props.defaultItem === item.newTitle) {

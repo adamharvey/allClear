@@ -15,7 +15,6 @@ var AddList = React.createClass({
   handleSubmit: function(e){
     event.preventDefault();
   //  this.props.add(this.state);
-  debugger;
       this.props.add(this.state.listName);
       this.setState({
         listName: ''
@@ -23,13 +22,20 @@ var AddList = React.createClass({
   },
   render: function() {
     return (
-      <form className="col-sm-6" onSubmit={this.handleSubmit}>
-      <h3 className="text-center">Create New List</h3>
+      <div>
+      <form  onSubmit={this.handleSubmit}>
+      <img src='logo.png'/>
+      <div
+      className='new-category-form'>
       <input type="text"
+      placeholder="Category Name"
+      className='category-input'
       onChange={this.handleChange}
       value={this.state.listName}/>{' '}
-      <button className="btn btn-primary">Add List</button>
+      <button className="btn btn-primary category-button">Add Issue Category</button>
+      </div>
       </form>
+      </div>
     )
   }
 });

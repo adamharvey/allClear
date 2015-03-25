@@ -15,7 +15,7 @@ li {
         top: 12;
         left: 6;
         cursor: pointer;
-        color: rgb(222, 79, 79);
+        color: #900;
 }
 
 .todoItem {
@@ -29,14 +29,40 @@ li {
 }
 
 .a {
-  background: #900;
+  background: #f7b047;
 }
 
 .b {
   background: #FFF;
-  padding: 1px;
+  padding: 25px;
 }
 
 .c {
   background: #FFF;
+}
+
+.category-input {
+  top: 50px;
+  right: 100px;
+}
+
+.category-button {
+  top: 100px;
+  right: 100px;
+}
+
+.new-category-form {
+  position: absolute;
+  right: 25px;
+  top: 25px;
+}
+
+.login-page {
+
+}
+
+.login-button {
+  position: absolute;
+  right: 25px;
+  top: 25px;
 }
