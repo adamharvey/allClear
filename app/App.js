@@ -70,7 +70,11 @@ var App = React.createClass({
     }
   },
   removeList: function(obj) {
+    var r = window.confirm("Do you want to delete this item?");
+    if (r == true) {
+
     this.firebaseRef.child(obj).remove();
+    }
   },
   selectColor: function(what) {
 
