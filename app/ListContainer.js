@@ -56,10 +56,11 @@ if (this.state.list == undefined)
     this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: this.state.list.concat([newItem + ' ' + window.user])});
   },
   handleRemoveItem: function(index){
-    var r = window.confirm("Are you sure you want to remove this item?");
+    var r = window.confirm("Is this item really complete?");
     if (r == true) {
       var newList = this.state.list;
-      newList.splice(index, 1);
+      newList[index] = newList[index] + ' - Done!';
+      //newList.splice(index, 1);
       this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: newList});
     }
   },

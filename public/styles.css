@@ -23,6 +23,12 @@ li {
           fontSize: 17px;
 }
 
+.todoItemStrikethru {
+          paddingLeft: 20px;
+          fontSize: 17px;
+          text-decoration: line-through;
+}
+
 .top-corner {
   position: absolute;
   top: 27px;
