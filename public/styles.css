@@ -69,6 +69,12 @@ li {
 
 .login-button {
   position: absolute;
-  right: 25px;
+  left: 125px;
   top: 25px;
+}
+
+.login-button2 {
+  position: absolute;
+  left: 125px;
+  top: 75px;
 }

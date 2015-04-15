@@ -11,7 +11,8 @@ var NotLoggedIn = React.createClass({
       <div
       className="login-page">
       <img src='logo.png'/>
-      <button onClick={this.props.that.handleLogin} className="btn btn-success login-button">Login via Google</button>
+      <button onClick={this.props.that.handleGithubLogin} className="btn btn-success login-button">Login via GitHub</button>
+      <button onClick={this.props.that.handleGoogleLogin} className="btn btn-success login-button2">Login via Google</button>
       </div>
     )
   }
@@ -72,8 +73,7 @@ var App = React.createClass({
   removeList: function(obj) {
     var r = window.confirm("Do you want to delete this item?");
     if (r == true) {
-
-    this.firebaseRef.child(obj).remove();
+      this.firebaseRef.child(obj).remove();
     }
   },
   selectColor: function(what) {
@@ -89,7 +89,24 @@ var App = React.createClass({
     this.firebaseRef.push(newItem)
   //});
   },
-  handleLogin: function(obj) {
+  handleGithubLogin: function(obj) {
+    this.firebaseRef.authWithOAuthPopup("github",function(error, authData) {
+      if (error) {
+        console.log("Bad Login: " + error);
+        return (
+          <div>uh oh!</div>
+        )
+      } else {
+        console.log("good login");
+        //debugger;
+        window.user = authData.github.displayName;
+        //var users = this.firebaseRef.child("users");
+        //users.set({ids:[window.user]});
+        this.setState({user: authData.github.displayName});
+      }
+    }.bind(this));
+  },
+  handleGoogleLogin: function(obj) {
     this.firebaseRef.authWithOAuthPopup("google",function(error, authData) {
       if (error) {
         console.log("Bad Login: " + error);
@@ -98,6 +115,7 @@ var App = React.createClass({
         )
       } else {
         console.log("good login");
+        //debugger;
         window.user = authData.google.displayName;
         //var users = this.firebaseRef.child("users");
         //users.set({ids:[window.user]});
