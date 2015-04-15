@@ -71,11 +71,13 @@ var App = React.createClass({
     }
   },
   removeList: function(obj) {
-    var r = window.confirm("Do you want to delete this item?");
-    if (r == true) {
-      this.firebaseRef.child(obj).remove();
-    }
-  },
+    var confirmAnswer = window.confirm("Do you want to delete this group?");
+    if (confirmAnswer == true) {
+      var doubleConfirmAnswer = window.confirm("I'm double checking, are you sure?");
+      if (doubleConfirmAnswer==true) {
+        this.firebaseRef.child(obj).remove();
+      }
+    }  },
   selectColor: function(what) {
 
   },
