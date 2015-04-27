@@ -250,11 +250,16 @@
 	    if (this.state.list == undefined)
 	      this.state.list = []; //TODO: why is it undefined?
 	    var name = ', reported by ' + window.user;
-	    debugger;
 	    if (this.props.defaultItem.toLowerCase().indexOf('release')>=0)
 	      name = '';
-	    var updatedItemList = this.state.list.concat([newItem + ' ' + name]);
-	    this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: updatedItemList});
+	    var that = this;
+	    newItem.split("\n").forEach(function(partItem) {
+	      if (partItem.trim().length()>0) {
+	        var updatedItemList = that.state.list.concat([partItem + ' ' + name]);
+	        that.state.list = updatedItemList;
+	      }
+	    });
+	    this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: this.state.list});
 	  },
 	  handleRemoveItem: function(index){
 	    if (window.confirm("Only delete this item if it was mistakenly entered. Continue?")) {
@@ -679,12 +684,13 @@
 	  render: function(){
 	    return (
 	      React.createElement("div", null, 
-	      React.createElement("input", {type: "text", 
+	      React.createElement("textarea", {type: "text", 
 	      className: "form-control", 
 	      value: this.state.newItem, 
 	      placeholder: this.props.placeholder, 
 	      onKeyDown: this.handleSubmit, 
-	      onChange: this.handleChange})
+	      onChange: this.handleChange}
+	      )
 	      )
 	    )
 	  }
