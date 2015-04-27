@@ -252,12 +252,22 @@
 	    this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: this.state.list.concat([newItem + ' ' + window.user])});
 	  },
 	  handleRemoveItem: function(index){
-	    var r = window.confirm("Is this item really complete?");
-	    if (r == true) {
-	      var newList = this.state.list;
-	      newList[index] = newList[index] + ' - Done!';
-	      //newList.splice(index, 1);
-	      this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: newList});
+	    if (window.confirm("Only delete this item if it was mistakenly entered. Continue?")) {
+	      if (window.confirm("Are you really sure?")) {
+	        var newList = this.state.list;
+	        newList.splice(index, 1);
+	        this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: newList});
+	      }
+	    }
+	  },
+	  handleMarkCompleted: function(index){
+	    if (window.confirm("Has this item been completed?")) {
+	      if (window.confirm("Are you really sure?")) {
+	        var newList = this.state.list;
+	        newList[index] = newList[index] + ' - Done!';
+	        //newList.splice(index, 1);
+	        this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: newList});
+	      }
 	    }
 	  },
 	  render: function(){
@@ -266,12 +276,12 @@
 	      React.createElement("div", {className: "col-sm-12 a"}, 
 	      React.createElement("div", {className: "c"}, 
 	      React.createElement("span", {
-	      className: "glyphicon glyphicon-remove delete top-corner", 
+	      className: "glyphicon glyphicon-remove redIcon top-corner", title: "Remove list (Bad)", 
 	      onClick: this.props.removeList.bind(null, this.props.index)}), 
 	      React.createElement("h3", {className: "text-center"}, this.props.defaultItem)
 	      ), 
 	      React.createElement(AddItem, {add: this.handleAddItem, placeholder: 'new ' + this.props.defaultItem + ' item'}), 
-	      React.createElement(List, {items: this.state.list, remove: this.handleRemoveItem})
+	      React.createElement(List, {items: this.state.list, remove: this.handleRemoveItem, markCompleted: this.handleMarkCompleted})
 	      )
 	      )
 	    )
@@ -689,21 +699,21 @@
 	        if (this.props.items == undefined) this.props.items = [];
 	        var listItems = this.props.items.map(function(item, index){
 	          var s = {background: '#'+index+index+index};
-	          var names = "glyphicon glyphicon-remove delete";
+	          var deleteStyles = "glyphicon glyphicon-remove redIcon";
+	          var doneStyles = "glyphicon glyphicon-ok greenIcon";
 	          var clazz={};
 	          if (item.indexOf(' - Done')>=0) {
 	            clazz = {
 	             textDecoration: 'line-through'
 	            };
-	            names="";
+	            doneStyles = "";
 	          }
 	      return (
 
 	        React.createElement("li", {key: index, className: "list-group-item"}, 
-	        React.createElement("span", {
-	        className: names, 
-	        onClick: this.props.remove.bind(null, index)}
-	        ), 
+	        React.createElement("span", {className: doneStyles, title: "Mark completed", onClick: this.props.markCompleted.bind(null, index)}), 
+
+	        React.createElement("span", {className: deleteStyles, title: "Remove from list", onClick: this.props.remove.bind(null, index)}), 
 	        React.createElement("span", {style: clazz}, 
 	      item
 	      )

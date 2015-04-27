@@ -56,12 +56,22 @@ if (this.state.list == undefined)
     this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: this.state.list.concat([newItem + ' ' + window.user])});
   },
   handleRemoveItem: function(index){
-    var r = window.confirm("Is this item really complete?");
-    if (r == true) {
-      var newList = this.state.list;
-      newList[index] = newList[index] + ' - Done!';
-      //newList.splice(index, 1);
-      this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: newList});
+    if (window.confirm("Only delete this item if it was mistakenly entered. Continue?")) {
+      if (window.confirm("Are you really sure?")) {
+        var newList = this.state.list;
+        newList.splice(index, 1);
+        this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: newList});
+      }
+    }
+  },
+  handleMarkCompleted: function(index){
+    if (window.confirm("Has this item been completed?")) {
+      if (window.confirm("Are you really sure?")) {
+        var newList = this.state.list;
+        newList[index] = newList[index] + ' - Done!';
+        //newList.splice(index, 1);
+        this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: newList});
+      }
     }
   },
   render: function(){
@@ -70,12 +80,12 @@ if (this.state.list == undefined)
       <div className="col-sm-12 a">
       <div className="c">
       <span
-      className="glyphicon glyphicon-remove delete top-corner"
+      className="glyphicon glyphicon-remove redIcon top-corner" title="Remove list (Bad)"
       onClick={this.props.removeList.bind(null, this.props.index)}/>
       <h3 className="text-center">{this.props.defaultItem}</h3>
       </div>
       <AddItem add={this.handleAddItem} placeholder={'new ' + this.props.defaultItem + ' item'}/>
-      <List items={this.state.list} remove={this.handleRemoveItem}/>
+      <List items={this.state.list} remove={this.handleRemoveItem} markCompleted={this.handleMarkCompleted}/>
       </div>
       </div>
     )

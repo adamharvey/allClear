@@ -8,7 +8,7 @@ li {
       border-radius: 5px;
 }
 
-.delete {
+.redIcon {
         font-size: 20;
         float: "left";
         position: "absolute";
@@ -16,6 +16,16 @@ li {
         left: 6;
         cursor: pointer;
         color: #900;
+}
+
+.greenIcon {
+        font-size: 20;
+        float: "left";
+        position: "absolute";
+        top: 12;
+        left: 6;
+        cursor: pointer;
+        color: #090;
 }
 
 .todoItem {
