@@ -57,8 +57,8 @@
 	      React.createElement("div", {
 	      className: "login-page"}, 
 	      React.createElement("img", {src: "logo.png"}), 
-	      React.createElement("button", {onClick: this.props.that.handleGithubLogin, className: "btn btn-success login-button"}, "Login via GitHub"), 
-	      React.createElement("button", {onClick: this.props.that.handleGoogleLogin, className: "btn btn-success login-button2"}, "Login via Google")
+	      React.createElement("button", {onClick: this.props.that.handleGithubLogin, className: "btn btn-success button-login-github"}, "Login via GitHub"), 
+	      React.createElement("button", {onClick: this.props.that.handleGoogleLogin, className: "btn btn-success button-login-google"}, "Login via Google")
 	      )
 	    )
 	  }
@@ -80,7 +80,7 @@
 	          )
 	        ), 
 	        lists, 
-	        React.createElement("div", {className: "b"}, 
+	        React.createElement("div", {className: "outerBorder"}, 
 	      window.users
 	      )
 	      )
@@ -247,9 +247,10 @@
 	    }.bind(this));
 	  },
 	  handleAddItem: function(newItem){
-	if (this.state.list == undefined)
-	  this.state.list = []; //TODO: why is it undefined?
-	    this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: this.state.list.concat([newItem + ' ' + window.user])});
+	    if (this.state.list == undefined)
+	      this.state.list = []; //TODO: why is it undefined?
+	    var nameWithUser = this.state.list.concat([newItem + ' ' + window.user]);
+	    this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: nameWithUser});
 	  },
 	  handleRemoveItem: function(index){
 	    if (window.confirm("Only delete this item if it was mistakenly entered. Continue?")) {
@@ -272,9 +273,9 @@
 	  },
 	  render: function(){
 	    return (
-	      React.createElement("div", {className: "col-sm-6 b"}, 
-	      React.createElement("div", {className: "col-sm-12 a"}, 
-	      React.createElement("div", {className: "c"}, 
+	      React.createElement("div", {className: "col-sm-6 outerBorder"}, 
+	      React.createElement("div", {className: "col-sm-12 midBorder"}, 
+	      React.createElement("div", {className: "innerBorder"}, 
 	      React.createElement("span", {
 	      className: "glyphicon glyphicon-remove redIcon top-corner", title: "Remove list (Bad)", 
 	      onClick: this.props.removeList.bind(null, this.props.index)}), 

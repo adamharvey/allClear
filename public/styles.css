@@ -44,16 +44,16 @@ li {
   top: 27px;
 }
 
-.a {
+.midBorder {
   background: #f7b047;
 }
 
-.b {
+.outerBorder {
   background: #FFF;
   padding: 25px;
 }
 
-.c {
+.innerBorder {
   background: #FFF;
 }
 
@@ -77,13 +77,13 @@ li {
 
 }
 
-.login-button {
+.button-login-github {
   position: absolute;
   left: 125px;
   top: 25px;
 }
 
-.login-button2 {
+.button-login-google {
   position: absolute;
   left: 125px;
   top: 75px;
