@@ -53,8 +53,12 @@ var ListContainer = React.createClass({
   handleAddItem: function(newItem){
     if (this.state.list == undefined)
       this.state.list = []; //TODO: why is it undefined?
-    var nameWithUser = this.state.list.concat([newItem + ' ' + window.user]);
-    this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: nameWithUser});
+    var name = ', reported by ' + window.user;
+    debugger;
+    if (this.props.defaultItem.toLowerCase().indexOf('release')>=0)
+      name = '';
+    var updatedItemList = this.state.list.concat([newItem + ' ' + name]);
+    this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: updatedItemList});
   },
   handleRemoveItem: function(index){
     if (window.confirm("Only delete this item if it was mistakenly entered. Continue?")) {
