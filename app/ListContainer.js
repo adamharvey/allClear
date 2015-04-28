@@ -70,11 +70,9 @@ var ListContainer = React.createClass({
   },
   handleRemoveItem: function(index){
     if (window.confirm("Only delete this item if it was mistakenly entered. Continue?")) {
-      if (window.confirm("Are you really sure?")) {
-        var newList = this.state.list;
-        newList.splice(index, 1);
-        this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: newList});
-      }
+      var newList = this.state.list;
+      newList.splice(index, 1);
+      this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: newList});
     }
   },
   handleMarkCompleted: function(index){
