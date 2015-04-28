@@ -3,7 +3,7 @@ var ListContainer = require('./ListContainer');
 var AddList = require('./AddList');
 var ColorList = require('./ColorList');
 var firebase = require('firebase');
-
+var $ = require('jquery');
 
 var NotLoggedIn = React.createClass({
   render: function() {

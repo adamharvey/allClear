@@ -2,6 +2,7 @@ var React = require('react');
 var AddItem = require('./AddItem');
 var List = require('./List');
 var firebase = require('firebase');
+var $ = require('jquery');
 
 var ListContainer = React.createClass({
   getInitialState: function(){
@@ -64,7 +65,6 @@ var ListContainer = React.createClass({
       name = '';
     var that = this;
     newItem.split("\n").forEach(function(partItem) {
-      debugger;
       if (partItem.trim().length>0) {
         var updatedItemList = that.state.list.concat([partItem + ' ' + name]);
         that.state.list = updatedItemList;
@@ -87,6 +87,13 @@ var ListContainer = React.createClass({
         var newList = this.state.list;
         newList[index] = newList[index] + ' - Done!';
         //newList.splice(index, 1);
+        var msg = '{"text": "'+newList[index]+'", "icon_url":"http://shellum.github.io/allClear/public/logo.png", "username":"allClear"}';
+        $.ajax({
+          type: "POST",
+          url: "https://hooks.slack.com/services/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",
+          data: msg
+        });
+
         this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: newList});
       }
     }

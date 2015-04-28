@@ -8,13 +8,11 @@ var List = React.createClass({
           var deleteStyles = "glyphicon glyphicon-remove redIcon";
           var doneStyles = "glyphicon glyphicon-ok greenIcon";
           var clazz={};
-          window.count++;
           if (item.indexOf(' - Done')>=0) {
             clazz = {
              textDecoration: 'line-through'
             };
             doneStyles = "";
-            window.count--;
           }
       return (
 
