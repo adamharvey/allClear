@@ -12,10 +12,15 @@ var ListContainer = React.createClass({
   },
   componentDidMount: function() {
     this.firebaseRef.on('value', function(items) {
+      window.count = 0;
       console.log("Startzzz");
       Object.keys(items.val()).forEach(function(key) {
         var item = items.val()[key];
         console.log(item);
+        if (item.items != undefined)
+          window.count += item.items.filter(function(i) {
+            return i.indexOf("Done")<0;
+          }).length;
         if (key == 'users') {
           console.log("###!"+item.ids);
           if (item.ids.indexOf(window.user) < 0) {
@@ -48,6 +53,7 @@ var ListContainer = React.createClass({
       this.setState({
         lists: newList
       })
+
     }.bind(this));
   },
   handleAddItem: function(newItem){
@@ -58,7 +64,8 @@ var ListContainer = React.createClass({
       name = '';
     var that = this;
     newItem.split("\n").forEach(function(partItem) {
-      if (partItem.trim().length()>0) {
+      debugger;
+      if (partItem.trim().length>0) {
         var updatedItemList = that.state.list.concat([partItem + ' ' + name]);
         that.state.list = updatedItemList;
       }

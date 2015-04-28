@@ -74,6 +74,7 @@
 
 	    return (
 	      React.createElement("div", null, 
+	      "Outstanding issues: ", window.count, 
 	        React.createElement("div", {className: "container"}, 
 	          React.createElement("div", {className: "row"}, 
 	            React.createElement(AddList, {add: this.props.that.addNewList})
@@ -208,10 +209,15 @@
 	  },
 	  componentDidMount: function() {
 	    this.firebaseRef.on('value', function(items) {
+	      window.count = 0;
 	      console.log("Startzzz");
 	      Object.keys(items.val()).forEach(function(key) {
 	        var item = items.val()[key];
 	        console.log(item);
+	        if (item.items != undefined)
+	          window.count += item.items.filter(function(i) {
+	            return i.indexOf("Done")<0;
+	          }).length;
 	        if (key == 'users') {
 	          console.log("###!"+item.ids);
 	          if (item.ids.indexOf(window.user) < 0) {
@@ -244,6 +250,7 @@
 	      this.setState({
 	        lists: newList
 	      })
+
 	    }.bind(this));
 	  },
 	  handleAddItem: function(newItem){
@@ -254,7 +261,8 @@
 	      name = '';
 	    var that = this;
 	    newItem.split("\n").forEach(function(partItem) {
-	      if (partItem.trim().length()>0) {
+	      debugger;
+	      if (partItem.trim().length>0) {
 	        var updatedItemList = that.state.list.concat([partItem + ' ' + name]);
 	        that.state.list = updatedItemList;
 	      }
@@ -713,11 +721,13 @@
 	          var deleteStyles = "glyphicon glyphicon-remove redIcon";
 	          var doneStyles = "glyphicon glyphicon-ok greenIcon";
 	          var clazz={};
+	          window.count++;
 	          if (item.indexOf(' - Done')>=0) {
 	            clazz = {
 	             textDecoration: 'line-through'
 	            };
 	            doneStyles = "";
+	            window.count--;
 	          }
 	      return (
 

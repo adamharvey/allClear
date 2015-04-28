@@ -28,6 +28,7 @@ var LoggedIn = React.createClass({
 
     return (
       <div>
+      Outstanding issues: {window.count}
         <div className="container">
           <div className="row">
             <AddList add={this.props.that.addNewList}/>
