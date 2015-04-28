@@ -11,7 +11,9 @@ var NotLoggedIn = React.createClass({
       <div
       className="login-page">
       <img src='logo.png'/>
+      <br/>
       <button onClick={this.props.that.handleGithubLogin} className="btn btn-success button-login-github">Login via GitHub</button>
+      <br/>
       <button onClick={this.props.that.handleGoogleLogin} className="btn btn-success button-login-google">Login via Google</button>
       </div>
     )
@@ -28,15 +30,18 @@ var LoggedIn = React.createClass({
 
     return (
       <div>
-      Outstanding issues: {window.count}
-        <div className="container">
-          <div className="row">
-            <AddList add={this.props.that.addNewList}/>
-          </div>
-        </div>
+      <span className="outstanding-items">Outstanding issues: {window.count}</span>
+
+      <img src='logo.png'/>
+      <br/>
         {lists}
         <div className="outerBorder">
       {window.users}
+      </div>
+      <div className="">
+        <div className="row">
+          <AddList add={this.props.that.addNewList}/>
+        </div>
       </div>
       </div>
     )

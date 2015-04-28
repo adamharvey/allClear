@@ -92,11 +92,11 @@ var ListContainer = React.createClass({
   },
   render: function(){
     return (
-      <div className="col-sm-6 outerBorder">
-      <div className="col-sm-12 midBorder">
-      <div className="innerBorder">
+      <div className="outerBorder">
+      <div className="midBorder">
+      <div className="titleBorder">
       <span
-      className="glyphicon glyphicon-remove redIcon top-corner" title="Remove list (Bad)"
+      className="glyphicon glyphicon-remove redIcon " title="Remove list (Bad)"
       onClick={this.props.removeList.bind(null, this.props.index)}/>
       <h3 className="text-center">{this.props.defaultItem}</h3>
       </div>

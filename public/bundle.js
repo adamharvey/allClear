@@ -57,7 +57,9 @@
 	      React.createElement("div", {
 	      className: "login-page"}, 
 	      React.createElement("img", {src: "logo.png"}), 
+	      React.createElement("br", null), 
 	      React.createElement("button", {onClick: this.props.that.handleGithubLogin, className: "btn btn-success button-login-github"}, "Login via GitHub"), 
+	      React.createElement("br", null), 
 	      React.createElement("button", {onClick: this.props.that.handleGoogleLogin, className: "btn btn-success button-login-google"}, "Login via Google")
 	      )
 	    )
@@ -74,15 +76,18 @@
 
 	    return (
 	      React.createElement("div", null, 
-	      "Outstanding issues: ", window.count, 
-	        React.createElement("div", {className: "container"}, 
-	          React.createElement("div", {className: "row"}, 
-	            React.createElement(AddList, {add: this.props.that.addNewList})
-	          )
-	        ), 
+	      React.createElement("span", {className: "outstanding-items"}, "Outstanding issues: ", window.count), 
+
+	      React.createElement("img", {src: "logo.png"}), 
+	      React.createElement("br", null), 
 	        lists, 
 	        React.createElement("div", {className: "outerBorder"}, 
 	      window.users
+	      ), 
+	      React.createElement("div", {className: ""}, 
+	        React.createElement("div", {className: "row"}, 
+	          React.createElement(AddList, {add: this.props.that.addNewList})
+	        )
 	      )
 	      )
 	    )
@@ -278,11 +283,11 @@
 	  },
 	  render: function(){
 	    return (
-	      React.createElement("div", {className: "col-sm-6 outerBorder"}, 
-	      React.createElement("div", {className: "col-sm-12 midBorder"}, 
-	      React.createElement("div", {className: "innerBorder"}, 
+	      React.createElement("div", {className: "outerBorder"}, 
+	      React.createElement("div", {className: "midBorder"}, 
+	      React.createElement("div", {className: "titleBorder"}, 
 	      React.createElement("span", {
-	      className: "glyphicon glyphicon-remove redIcon top-corner", title: "Remove list (Bad)", 
+	      className: "glyphicon glyphicon-remove redIcon ", title: "Remove list (Bad)", 
 	      onClick: this.props.removeList.bind(null, this.props.index)}), 
 	      React.createElement("h3", {className: "text-center"}, this.props.defaultItem)
 	      ), 
@@ -327,14 +332,14 @@
 	    return (
 	      React.createElement("div", null, 
 	      React.createElement("form", {onSubmit: this.handleSubmit}, 
-	      React.createElement("img", {src: "logo.png"}), 
 	      React.createElement("div", {
 	      className: "new-category-form"}, 
 	      React.createElement("input", {type: "text", 
 	      placeholder: "Category Name", 
 	      className: "category-input", 
 	      onChange: this.handleChange, 
-	      value: this.state.listName}), ' ', 
+	      value: this.state.listName}), 
+	      React.createElement("br", null), 
 	      React.createElement("button", {className: "btn btn-primary category-button"}, "Add Issue Category")
 	      )
 	      )

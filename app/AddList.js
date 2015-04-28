@@ -24,14 +24,14 @@ var AddList = React.createClass({
     return (
       <div>
       <form  onSubmit={this.handleSubmit}>
-      <img src='logo.png'/>
       <div
       className='new-category-form'>
       <input type="text"
       placeholder="Category Name"
       className='category-input'
       onChange={this.handleChange}
-      value={this.state.listName}/>{' '}
+      value={this.state.listName}/>
+      <br/>
       <button className="btn btn-primary category-button">Add Issue Category</button>
       </div>
       </form>

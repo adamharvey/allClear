@@ -8,6 +8,10 @@ li {
       border-radius: 5px;
 }
 
+img {
+  float: left;
+}
+
 .redIcon {
         font-size: 20;
         float: "left";
@@ -51,26 +55,33 @@ li {
 .outerBorder {
   background: #FFF;
   padding: 25px;
+  width: 400px;
+  float: left;
+  clear: left;
 }
 
-.innerBorder {
+.titleBorder {
   background: #FFF;
+  border-color: #000;
 }
 
 .category-input {
   top: 50px;
   right: 100px;
+  margin: 10px;
+}
+
+.outstanding-items {
+  margin: 10px;
+  font-size: 14px;
 }
 
 .category-button {
-  top: 100px;
-  right: 100px;
+  margin: 10px;
 }
 
 .new-category-form {
-  position: absolute;
-  right: 25px;
-  top: 25px;
+  margin: 10px;
 }
 
 .login-page {
@@ -78,13 +89,9 @@ li {
 }
 
 .button-login-github {
-  position: absolute;
-  left: 125px;
-  top: 25px;
+  margin: 10px;
 }
 
 .button-login-google {
-  position: absolute;
-  left: 125px;
-  top: 75px;
+  margin: 10px;
 }
