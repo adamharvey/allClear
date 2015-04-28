@@ -263,7 +263,6 @@
 	  },
 	  handleMarkCompleted: function(index){
 	    if (window.confirm("Has this item been completed?")) {
-	      if (window.confirm("Are you really sure?")) {
 	        var newList = this.state.list;
 	        newList[index] = newList[index] + ' - Done!';
 	        //newList.splice(index, 1);
@@ -275,7 +274,6 @@
 	        });
 
 	        this.firebaseRef.child(this.props.index).set({newTitle: this.props.defaultItem, items: newList});
-	      }
 	    }
 	  },
 	  render: function(){
