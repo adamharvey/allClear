@@ -14,16 +14,13 @@ var ListContainer = React.createClass({
   componentDidMount: function() {
     this.firebaseRef.on('value', function(items) {
       window.count = 0;
-      console.log("Startzzz");
       Object.keys(items.val()).forEach(function(key) {
         var item = items.val()[key];
-        console.log(item);
         if (item.items != undefined)
           window.count += item.items.filter(function(i) {
             return i.indexOf("Done")<0;
           }).length;
         if (key == 'users') {
-          console.log("###!"+item.ids);
           if (item.ids.indexOf(window.user) < 0) {
             item.ids.unshift(window.user);
             this.firebaseRef.child('users').set(item);
@@ -37,7 +34,6 @@ var ListContainer = React.createClass({
           });
         };
       }.bind(this));
-      console.log("Endzzz");
     }.bind(this));
     this.firebaseRef.on('child_changed', function(item) {
       if (this.props.defaultItem === item.val().newTitle) {

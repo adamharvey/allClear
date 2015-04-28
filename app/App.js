@@ -87,10 +87,7 @@ var App = React.createClass({
       newTitle: obj,
       list: []
     };
-  //  setTimeout( function(){
-  //    debugger;
     this.firebaseRef.push(newItem)
-  //});
   },
   handleGithubLogin: function(obj) {
     this.firebaseRef.authWithOAuthPopup("github",function(error, authData) {
@@ -100,11 +97,7 @@ var App = React.createClass({
           <div>uh oh!</div>
         )
       } else {
-        console.log("good login");
-        //debugger;
         window.user = authData.github.displayName;
-        //var users = this.firebaseRef.child("users");
-        //users.set({ids:[window.user]});
         this.setState({user: authData.github.displayName});
       }
     }.bind(this));
@@ -117,11 +110,7 @@ var App = React.createClass({
           <div>uh oh!</div>
         )
       } else {
-        console.log("good login");
-        //debugger;
         window.user = authData.google.displayName;
-        //var users = this.firebaseRef.child("users");
-        //users.set({ids:[window.user]});
         this.setState({user: authData.google.displayName});
       }
     }.bind(this));
