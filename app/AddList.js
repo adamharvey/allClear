@@ -22,10 +22,9 @@ var AddList = React.createClass({
   },
   render: function() {
     return (
-      <div>
+      <div className='new-category-form'>
       <form  onSubmit={this.handleSubmit}>
-      <div
-      className='new-category-form'>
+      <div>
       <input type="text"
       placeholder="Category Name"
       className='category-input'

@@ -21,7 +21,7 @@ var AddItem = React.createClass({
   },
   render: function(){
     return (
-      <div>
+      <div className="titleBorder">
       <textarea type="text"
       className="form-control"
       value={this.state.newItem}

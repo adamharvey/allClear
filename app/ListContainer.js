@@ -98,7 +98,7 @@ var ListContainer = React.createClass({
       <span
       className="glyphicon glyphicon-remove redIcon " title="Remove list (Bad)"
       onClick={this.props.removeList.bind(null, this.props.index)}/>
-      <h3 className="text-center">{this.props.defaultItem}</h3>
+      <span className="text-center">{this.props.defaultItem}</span>
       </div>
       <AddItem add={this.handleAddItem} placeholder={'new ' + this.props.defaultItem + ' item'}/>
       <List items={this.state.list} remove={this.handleRemoveItem} markCompleted={this.handleMarkCompleted}/>

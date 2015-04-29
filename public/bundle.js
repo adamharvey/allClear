@@ -56,7 +56,7 @@
 	    return (
 	      React.createElement("div", {
 	      className: "login-page"}, 
-	      React.createElement("img", {src: "logo.png"}), 
+	      React.createElement("img", {className: "logo", src: "logo.png"}), 
 	      React.createElement("br", null), 
 	      React.createElement("button", {onClick: this.props.that.handleGithubLogin, className: "btn btn-success button-login-github"}, "Login via GitHub"), 
 	      React.createElement("br", null), 
@@ -76,10 +76,12 @@
 
 	    return (
 	      React.createElement("div", null, 
-	      React.createElement("span", {className: "outstanding-items"}, "Outstanding issues: ", window.count), 
-
-	      React.createElement("img", {src: "logo.png"}), 
-	      React.createElement("br", null), 
+	      React.createElement("div", {className: "headers"}, 
+	        React.createElement("img", {className: "logo", src: "logo.png"}), 
+	        React.createElement("br", null), 
+	        React.createElement("span", {className: "outstanding-items"}, window.count, " issues left")
+	      ), 
+	      React.createElement("div", {className: "clear"}, 
 	        lists, 
 	        React.createElement("div", {className: "outerBorder"}, 
 	      window.users
@@ -88,6 +90,7 @@
 	        React.createElement("div", {className: "row"}, 
 	          React.createElement(AddList, {add: this.props.that.addNewList})
 	        )
+	      )
 	      )
 	      )
 	    )
@@ -289,7 +292,7 @@
 	      React.createElement("span", {
 	      className: "glyphicon glyphicon-remove redIcon ", title: "Remove list (Bad)", 
 	      onClick: this.props.removeList.bind(null, this.props.index)}), 
-	      React.createElement("h3", {className: "text-center"}, this.props.defaultItem)
+	      React.createElement("span", {className: "text-center"}, this.props.defaultItem)
 	      ), 
 	      React.createElement(AddItem, {add: this.handleAddItem, placeholder: 'new ' + this.props.defaultItem + ' item'}), 
 	      React.createElement(List, {items: this.state.list, remove: this.handleRemoveItem, markCompleted: this.handleMarkCompleted})
@@ -330,10 +333,9 @@
 	  },
 	  render: function() {
 	    return (
-	      React.createElement("div", null, 
+	      React.createElement("div", {className: "new-category-form"}, 
 	      React.createElement("form", {onSubmit: this.handleSubmit}, 
-	      React.createElement("div", {
-	      className: "new-category-form"}, 
+	      React.createElement("div", null, 
 	      React.createElement("input", {type: "text", 
 	      placeholder: "Category Name", 
 	      className: "category-input", 
@@ -684,7 +686,7 @@
 	  },
 	  render: function(){
 	    return (
-	      React.createElement("div", null, 
+	      React.createElement("div", {className: "titleBorder"}, 
 	      React.createElement("textarea", {type: "text", 
 	      className: "form-control", 
 	      value: this.state.newItem, 

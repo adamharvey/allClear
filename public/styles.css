@@ -1,6 +1,7 @@
 ul {
     padding-left: 0;
     list-style-type: none;
+    padding: 5px;
 }
 
 li {
@@ -8,9 +9,7 @@ li {
       border-radius: 5px;
 }
 
-img {
-  float: left;
-}
+
 
 .redIcon {
         font-size: 20;
@@ -52,17 +51,24 @@ img {
   background: #f7b047;
 }
 
+.headers {
+  margin: 25px;
+}
 .outerBorder {
   background: #FFF;
   padding: 25px;
-  width: 400px;
+  width: 550px;
   float: left;
-  clear: left;
+}
+
+.clear {
+  clear:both;
 }
 
 .titleBorder {
   background: #FFF;
   border-color: #000;
+  border: 5px solid #f7b047;
 }
 
 .category-input {
@@ -82,6 +88,7 @@ img {
 
 .new-category-form {
   margin: 10px;
+  clear: both;
 }
 
 .login-page {
