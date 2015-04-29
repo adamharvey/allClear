@@ -19,6 +19,7 @@ li {
         left: 6;
         cursor: pointer;
         color: #900;
+        margin-left: 50px;
 }
 
 .greenIcon {
