@@ -7,6 +7,7 @@ var List = React.createClass({
           var s = {background: '#'+index+index+index};
           var deleteStyles = "glyphicon glyphicon-remove redIcon";
           var doneStyles = "glyphicon glyphicon-ok greenIcon";
+          var itemParts = item.split(/([eE][aA][sS]-\d*)/);
           var clazz={};
           if (item.indexOf(' - Done')>=0) {
             clazz = {
@@ -14,6 +15,18 @@ var List = React.createClass({
             };
             doneStyles = "";
           }
+          var pre = itemParts[0];
+          var mid = 'https://jira.octanner.com/browse/'+itemParts[1];
+          var mid2 =itemParts[1];
+          var post = itemParts[2];
+          if (itemParts.length == 1)
+          item = ({item})
+          else
+          item = (<span>{pre}
+            <a href={mid} target="_blank">
+            {mid2}
+            </a>
+            {post}</span>)
       return (
 
         <li key={index} className="list-group-item">

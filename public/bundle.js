@@ -715,6 +715,7 @@
 	          var s = {background: '#'+index+index+index};
 	          var deleteStyles = "glyphicon glyphicon-remove redIcon";
 	          var doneStyles = "glyphicon glyphicon-ok greenIcon";
+	          var itemParts = item.split(/([eE][aA][sS]-\d*)/);
 	          var clazz={};
 	          if (item.indexOf(' - Done')>=0) {
 	            clazz = {
@@ -722,6 +723,18 @@
 	            };
 	            doneStyles = "";
 	          }
+	          var pre = itemParts[0];
+	          var mid = 'https://jira.octanner.com/browse/'+itemParts[1];
+	          var mid2 =itemParts[1];
+	          var post = itemParts[2];
+	          if (itemParts.length == 1)
+	          item = ({item:item})
+	          else
+	          item = (React.createElement("span", null, pre, 
+	            React.createElement("a", {href: mid, target: "_blank"}, 
+	            mid2
+	            ), 
+	            post))
 	      return (
 
 	        React.createElement("li", {key: index, className: "list-group-item"}, 
