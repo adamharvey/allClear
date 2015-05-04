@@ -120,6 +120,7 @@ li {
 
 .new-category-form {
   margin: 10px;
+  border: 1px black solid;
   clear: both;
 }
 
