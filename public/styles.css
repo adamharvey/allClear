@@ -26,8 +26,8 @@ li {
 }
 
 .parallax-background {
-  -webkit-transform: translate3d(-700px,-300px,-1px) scale(1);
-  transform: translate3d(-700px,-300px,-1px) scale(1);
+  -webkit-transform: translate3d(-700px,-400px,-1px) scale(1);
+  transform: translate3d(-700px,-400px,-1px) scale(1);
   width: 5000px;
   height: 5000px;
 }
