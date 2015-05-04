@@ -8,14 +8,13 @@ var $ = require('jquery');
 var NotLoggedIn = React.createClass({
   render: function() {
     return (
-      <div
-      className="login-page">
-      <img className="logo" src='logo.png'/>
-      <br/>
-      <button onClick={this.props.that.handleGithubLogin} className="btn btn-success button-login-github">Login via GitHub</button>
-      <br/>
-      <button onClick={this.props.that.handleGoogleLogin} className="btn btn-success button-login-google">Login via Google</button>
-      </div>
+      <div className="login-page">
+        <img className="logo" src='logo.png'/>
+        <br/>
+          <button onClick={this.props.that.handleGithubLogin} className="btn btn-success button-login-github">Login via GitHub</button>
+          <br/>
+          <button onClick={this.props.that.handleGoogleLogin} className="btn btn-success button-login-google">Login via Google</button>
+        </div>
     )
   }
 });
@@ -29,21 +28,28 @@ var LoggedIn = React.createClass({
     }.bind(this));
 
     return (
-      <div>
+      <div className="parallax">
+      <div className="parallax-layer parallax-background">
+      <div className="water">
+      </div>
+      </div>
+
+      <div className="parallax-layer parallax-foreground">
       <div className="headers">
         <img className="logo" src='logo.png'/>
         <br/>
-        <span className="outstanding-items">{window.count} issues left</span>
+        <span className="text-block">{window.count} issues left</span>
       </div>
       <div className="clear">
         {lists}
         <div className="outerBorder">
       {window.users}
       </div>
-      <div className="">
+      <div>
         <div className="row">
           <AddList add={this.props.that.addNewList}/>
         </div>
+      </div>
       </div>
       </div>
       </div>

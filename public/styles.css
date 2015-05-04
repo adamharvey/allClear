@@ -9,7 +9,28 @@ li {
       border-radius: 5px;
 }
 
+.parallax {
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-perspective: 1px;
+  perspective: 1px;
+}
 
+.parallax-layer {
+}
+
+.parallax-foreground {
+  -webkit-transform: translate3d(0px,-5000px,0) scale(1);
+  transform: translate3d(0px,-5000px,0) scale(1);
+}
+
+.parallax-background {
+  -webkit-transform: translate3d(-700px,-300px,-1px) scale(1);
+  transform: translate3d(-700px,-300px,-1px) scale(1);
+  width: 5000px;
+  height: 5000px;
+}
 
 .redIcon {
         font-size: 20;
@@ -58,9 +79,16 @@ li {
 }
 .outerBorder {
   background: #FFF;
-  padding: 25px;
+  margin: 25px;
   width: 550px;
   float: left;
+}
+
+.water {
+  background-image: url("water.png");
+  background-repeat: repeat;
+  width: 5000px;
+  height: 5000px;
 }
 
 .clear {
@@ -79,9 +107,11 @@ li {
   margin: 10px;
 }
 
-.outstanding-items {
+.text-block {
   margin: 10px;
-  font-size: 14px;
+  padding: 5px;
+  font-size: 18px;
+  background-color: white;
 }
 
 .category-button {
@@ -94,7 +124,10 @@ li {
 }
 
 .login-page {
-
+  height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px;
 }
 
 .button-login-github {
