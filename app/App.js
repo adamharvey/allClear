@@ -4,6 +4,7 @@ var AddList = require('./AddList');
 var ColorList = require('./ColorList');
 var firebase = require('firebase');
 var $ = require('jquery');
+var SlackConfig = require('./SlackConfig');
 
 var NotLoggedIn = React.createClass({
   render: function() {
@@ -48,6 +49,7 @@ var LoggedIn = React.createClass({
       <div>
         <div className="row">
           <AddList add={this.props.that.addNewList}/>
+          <SlackConfig firebase={this.props.that.firebaseRef}/>
         </div>
       </div>
       </div>

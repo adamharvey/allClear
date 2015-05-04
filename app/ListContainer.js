@@ -28,6 +28,9 @@ var ListContainer = React.createClass({
           window.users = item.ids.join(", ");
           this.props.parent.forceUpdate();
         }
+        if (key == 'slack') {
+          window.slack = item;
+        }
         if (this.props.defaultItem === item.newTitle) {
           this.setState({
             list: item.items
@@ -83,7 +86,7 @@ var ListContainer = React.createClass({
         var msg = '{"text": "'+newList[index]+'", "icon_url":"http://shellum.github.io/allClear/public/logo.png", "username":"allClear"}';
         $.ajax({
           type: "POST",
-          url: "https://hooks.slack.com/services/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",
+          url: window.slack,
           data: msg
         });
 
