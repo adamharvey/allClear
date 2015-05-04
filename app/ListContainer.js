@@ -103,7 +103,7 @@ var ListContainer = React.createClass({
       onClick={this.props.removeList.bind(null, this.props.index)}/>
       <span className="text-center">{this.props.defaultItem}</span>
       </div>
-      <AddItem add={this.handleAddItem} placeholder={'new ' + this.props.defaultItem + ' item'}/>
+      <AddItem add={this.handleAddItem} placeholder={'Enter a ' + this.props.defaultItem + ' item & hit enter'}/>
       <List items={this.state.list} remove={this.handleRemoveItem} markCompleted={this.handleMarkCompleted}/>
       </div>
       </div>

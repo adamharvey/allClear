@@ -305,7 +305,7 @@
 	      onClick: this.props.removeList.bind(null, this.props.index)}), 
 	      React.createElement("span", {className: "text-center"}, this.props.defaultItem)
 	      ), 
-	      React.createElement(AddItem, {add: this.handleAddItem, placeholder: 'new ' + this.props.defaultItem + ' item'}), 
+	      React.createElement(AddItem, {add: this.handleAddItem, placeholder: 'Enter a ' + this.props.defaultItem + ' item & hit enter'}), 
 	      React.createElement(List, {items: this.state.list, remove: this.handleRemoveItem, markCompleted: this.handleMarkCompleted})
 	      )
 	      )
