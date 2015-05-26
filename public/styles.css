@@ -84,10 +84,10 @@ li {
   float: left;
 }
 
-.water {
-  background-image: url("water.png");
+.grid {
+  background-image: url("grid.png");
   background-repeat: repeat;
-  width: 5000px;
+  width: 100%;
   height: 5000px;
 }
 

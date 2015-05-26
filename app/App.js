@@ -31,7 +31,7 @@ var LoggedIn = React.createClass({
     return (
       <div className="parallax">
       <div className="parallax-layer parallax-background">
-      <div className="water">
+      <div className="grid">
       </div>
       </div>
 
