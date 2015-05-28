@@ -83,7 +83,7 @@ var ListContainer = React.createClass({
         var newList = this.state.list;
         newList[index] = newList[index] + ' - Done!';
         //newList.splice(index, 1);
-        var msg = '{"text": "'+newList[index]+'", "icon_url":"http://shellum.github.io/allClear/public/logo.png", "username":"allClear"}';
+        var msg = '{"text": "'+newList[index]+'('+(window.count-1)+' left)", "icon_url":"http://shellum.github.io/allClear/public/logo.png", "username":"allClear"}';
         $.ajax({
           type: "POST",
           url: window.slack,
