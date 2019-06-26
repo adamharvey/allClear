@@ -2,7 +2,6 @@ var React = require('react');
 var ListContainer = require('./ListContainer');
 var AddList = require('./AddList');
 var ColorList = require('./ColorList');
-var firebase = require('firebase');
 var $ = require('jquery');
 var SlackConfig = require('./SlackConfig');
 
@@ -64,13 +63,13 @@ var App = React.createClass({
   componentDidMount: function() {
     this.firebaseRef.on('child_added', function(item) {
       if (item.val().newTitle != undefined)
-        this.superList = this.superList.concat([{newTitle: item.val().newTitle, index: item.key()}]);
+        this.superList = this.superList.concat([{newTitle: item.val().newTitle, index: item.key}]);
       this.setState({
         lists: this.superList
       });
     }.bind(this));
     this.firebaseRef.on('child_removed', function(item) {
-      var key = item.key();
+      var key = item.key;
       this.superList = this.superList.filter(function(item) {
         return item.index !== key;
       });
@@ -80,7 +79,17 @@ var App = React.createClass({
     }.bind(this));
   },
   getInitialState: function() {
-    this.firebaseRef = new firebase("https://all-clear.firebaseio.com");
+    var config = {
+      apiKey: "AIzaSyBXVCGq_o_XfEkPhiEKyB9z_eTaLz_srRk",
+      authDomain: "all-clear-f9982.firebaseapp.com",
+      databaseURL: "https://all-clear-f9982.firebaseio.com"
+    };
+    firebase.initializeApp(config);
+
+//    this.firebaseRef = new firebase("https://all-clear.firebaseio.com");
+    this.firebaseRef = new firebase("https://all-clear-f9982.firebaseapp.com");
+//    this.firebaseRef = firebase.database().ref();
+    console.log("firebase.database().ref():  " + firebase.database().ref());
     this.superList = [];
     this.firebaseRef.child('users').set({ids:['Obert']});
     return {
@@ -106,30 +115,62 @@ var App = React.createClass({
     this.firebaseRef.push(newItem)
   },
   handleGithubLogin: function(obj) {
-    this.firebaseRef.authWithOAuthPopup("github",function(error, authData) {
-      if (error) {
-        console.log("Bad Login: " + error);
-        return (
-          <div>uh oh!</div>
-        )
-      } else {
-        window.user = authData.github.displayName;
-        this.setState({user: authData.github.displayName});
-      }
-    }.bind(this));
+    // this.firebaseRef.authWithOAuthPopup("github",function(error, authData) {
+    //   if (error) {
+    //     console.log("Bad Login: " + error);
+    //     return (
+    //       <div>uh oh!</div>
+    //     )
+    //   } else {
+    //     window.user = authData.github.displayName;
+    //     this.setState({user: authData.github.displayName});
+    //   }
+    // }.bind(this));
+
+//    var auth = firebase.auth();
+    var provider = new firebase.auth.GithubAuthProvider();
+    provider.addScope('repo');
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+      // User signed in!
+      console.log(result);
+      window.user = result.user.displayName;
+      this.setState({user: result.user.displayName});
+    }).catch(function(error) {
+      console.log("Bad Login: " + error);
+      return (
+        <div>uh oh!</div>
+      )
+    });
   },
   handleGoogleLogin: function(obj) {
-    this.firebaseRef.authWithOAuthPopup("google",function(error, authData) {
-      if (error) {
-        console.log("Bad Login: " + error);
-        return (
-          <div>uh oh!</div>
-        )
-      } else {
-        window.user = authData.google.displayName;
-        this.setState({user: authData.google.displayName});
-      }
-    }.bind(this));
+    // this.firebaseRef.authWithOAuthPopup("google",function(error, authData) {
+    //   if (error) {
+    //     console.log("Bad Login: " + error);
+    //     return (
+    //       <div>uh oh!</div>
+    //     )
+    //   } else {
+    //     window.user = authData.google.displayName;
+    //     this.setState({user: authData.google.displayName});
+    //   }
+    // }.bind(this));
+    var auth = firebase.auth();
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/plus.login');
+    auth.signInWithPopup(provider).then(function(result) {
+      // User signed in!
+      window.user = result.user.displayName;
+      console.log("User:  " + result);
+      console.log("   --> " + result.user);
+      console.log("     --> " + result.user.displayName);
+      this.setState({user: result.user.displayName});
+//    }.bind(this)).catch(function(error) {
+    }).catch(function(error) {
+      console.log("Bad Login: " + error);
+      return (
+        <div>uh oh!</div>
+      )
+    });
   },
   render: function(){
     var user = this.state.user;

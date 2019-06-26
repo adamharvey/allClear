@@ -8,11 +8,16 @@ var AddList = React.createClass({
     }
   },
   handleChange: function(e){
+
+    console.log("Handling change..." + e.target.value);
+
     this.setState({
       listName: e.target.value
     })
   },
   handleSubmit: function(e){
+
+    console.log("Handling submit..." + this.state.listName);
     event.preventDefault();
   //  this.props.add(this.state);
       this.props.add(this.state.listName);

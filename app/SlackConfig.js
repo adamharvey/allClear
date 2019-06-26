@@ -1,5 +1,4 @@
 var React = require('react');
-var firebase = require('firebase');
 
 var SlackConfig = React.createClass({
   getInitialState: function() {

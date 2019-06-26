@@ -1,9 +1,13 @@
+path = require('path')
+
+
 module.exports = {
   entry: {
-    Home: './app/App.js'
+    app: './app/App.js'
   },
   output: {
-    filename: 'public/bundle.js'
+    path: path.resolve(__dirname, 'public'),
+    filename: 'bundle.js'
   },
   resolve: {
     alias: {
@@ -11,7 +15,7 @@ module.exports = {
     }
   },
   module: {
-    loaders: [
+    rules: [
       { test: /\.js$/, loader: 'jsx-loader?harmony' }
     ]
   }

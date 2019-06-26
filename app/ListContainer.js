@@ -1,7 +1,6 @@
 var React = require('react');
 var AddItem = require('./AddItem');
 var List = require('./List');
-var firebase = require('firebase');
 var $ = require('jquery');
 
 var ListContainer = React.createClass({
@@ -83,7 +82,7 @@ var ListContainer = React.createClass({
         var newList = this.state.list;
         newList[index] = newList[index] + ' - Done!';
         //newList.splice(index, 1);
-        var msg = '{"text": "'+newList[index]+'('+(window.count-1)+' left)", "icon_url":"http://shellum.github.io/allClear/public/logo.png", "username":"allClear"}';
+        var msg = '{"text": "'+newList[index]+'('+(window.count-1)+' left)", "icon_url":"https://all-clear-f9982.firebaseapp.com/logo.png", "username":"allClear"}';
         $.ajax({
           type: "POST",
           url: window.slack,
